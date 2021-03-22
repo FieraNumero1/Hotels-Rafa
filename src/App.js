@@ -1,11 +1,23 @@
 import { Counter } from './features/counter/Counter';
 import Header from './components/Header';
+import Home from './components/Home';
+import SearchPage from './components/SearchPage';
+import {BrowserRouter as Router, Switch, Route, Link}  from 'react-router-dom';
 
 function App() {
   return (
-    <div>
+    <Router>
       <Header/>
-    </div>
+      <Switch>
+        <Route path="/search">
+          <SearchPage/>
+        </Route>
+        <Route path="/">
+          <Home/>          
+        </Route>
+
+      </Switch>
+    </Router>
     
   );
 }
