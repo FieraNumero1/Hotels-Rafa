@@ -1,4 +1,4 @@
-import { AppBar, InputBase, makeStyles, Toolbar } from '@material-ui/core'
+import { AppBar, Avatar, InputBase, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import logo from '../issest/img/logo.PNG'
 import SearchIcon from '@material-ui/icons/Search'
@@ -14,50 +14,68 @@ const Header = () => {
                 <img src={logo} className={classes.logo} />
                 <div className={classes.center}>
                     <InputBase fullwidth placeholder="Buscar ..." inputProps={{ className: classes.input }} />
-                    <SearchIcon style={{ color: '#982F27' }} />
+                    <SearchIcon style={{ color: '#982F27', paddingRight: '5px'}} />
+                </div>
+                <div className={classes.right}>
+                    <Typography style={{ color: '#982F27'}}>
+                        Sign in
+                    </Typography>
+                    <Avatar className={classes.avatar}/>
                 </div>
             </Toolbar>
         )
     }
 
     return (
-        <AppBar>
+        <AppBar className={classes.root}>
             {mobileView ? displayMobile() : displayDesktop()}
         </AppBar>
     )
 }
 
 const useStyle = makeStyles((styles) => ({
+    root: {
+      position: "sticky",
+      top: 0,
+      backgroundColor: "white",
+      zIndex: 99,
+      width: "100vw",
+    },
     toolbar: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor:'white'
-
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
     logo: {
-        height: "60px",
-        margin: styles.spacing(1, 0, 0, 2),
-        objectFit: "contain"
-    },
-    input: {
-        fontSize: "1.2rem",
-        padding: styles.spacing(1,5,1,5),
-        
-        margin: '8px',
-        display: 'flex',
-        alignItems: 'center',
-        borderRadius: '999px',
+      height: "50px",
+      margin: styles.spacing(1, 0, 0, 2),
+      objectFit: "contain",
     },
     center: {
-        display: 'flex',
-        alignItems: 'center',
-        border: '1px solid #982F27',
-        minWidth:'300px',
-        borderRadius: '999px',
-        padding: styles.spacing(1),
-        margin: styles.spacing(1),
+      display: "flex",
+      alignItems: "center",
+      maxWidth: "fit-content",
+      border: '1px solid #982F27',
+      borderRadius: "999px",
+      [styles.breakpoints.down("xs")]: {
+        display: "none",
+      },
     },
-}))
+    input: {
+      color: '#982F27',
+      padding: styles.spacing(1, 2, 1, 2),
+      fontSize: "1.2rem",
+    },
+    right: {
+      color: "#982F27",
+      display: "flex",
+      alignItems: "center",
+      marginLeft: styles.spacing(1),
+      padding: styles.spacing(2),
+    },
+    avatar: {
+      marginLeft: styles.spacing(2),
+    },
+  }));
 
 export default Header
