@@ -1,10 +1,10 @@
-import { AppBar, Avatar, List, ListItem, IconButton, InputBase, makeStyles, Toolbar, Typography, Link } from '@material-ui/core'
+import { AppBar, Avatar, List, IconButton, InputBase, makeStyles, Toolbar, Typography,  Button } from '@material-ui/core'
 import React, { useState, useEffect } from 'react'
 import logo from '../issest/img/logo.PNG'
+import foto from '../issest/img/foto.jpg'
 import SearchIcon from '@material-ui/icons/Search'
 import MenuIcon from '@material-ui/icons/Menu'
 import Drawer from '@material-ui/core/Drawer';
-
 
 const Header = () => {
 
@@ -34,7 +34,9 @@ const Header = () => {
             return headersData.map((data) => {
                 return (
                     <List>
-                        <ListItem>{data}</ListItem>
+                        <Button variant="contained" onClick={() => { alert('pulsado') }}  style={{ backgroundColor: 'white', width: '100%', color: "#982F27"}}> 
+                        {data} {/* Aqui podemos hacer un onClick y aqui en el meter en el array el navigator */}
+                        </Button>
                     </List>
                 );
             });
@@ -44,13 +46,13 @@ const Header = () => {
                 <IconButton
                     {...{
                         edge: "start",
-                        color: "#ccc",
+                        color: "#982F27",
                         "aria-label": "menu",
                         "aria-haspopup": "true", //notifica a los usuarios con dificultades visuales, de que este elemento tiene un menu desplegable
                         onClick: handleDrawerOpen,
                     }}
                 >
-                    <MenuIcon fontSize='large' />
+                    <MenuIcon style={{color:'#982F27'}} fontSize='large' />
                 </IconButton>
                 <Drawer
                     {...{
@@ -59,33 +61,39 @@ const Header = () => {
                         onClose: handleDrawerClose,
                     }}
                 >
+                    <a href='/'>
+                        <img src={logo} className={classes.logo} />
+                    </a>
                     <div>{getDrawerChoices()}</div>
                 </Drawer>
-                <Link to='/'>
+                <a href='/'>
                     <img src={logo} className={classes.logo} alt='logo' />
-                </Link>
+                </a>
                 <div className={classes.right}>
-                    <Typography>Sign in</Typography>
-                    <Avatar className={classes.avatar} />
+                    <a href='/' style={{textDecoration:'none', color: "#982F27"}}> Rafael Martínez </a>
+                    <Avatar alt='Foto' src={foto}  className={classes.avatar}/> 
                 </div>
             </Toolbar>
         );
     };
 
-
     const displayDesktop = () => {
         return (
             <Toolbar className={classes.toolbar}>
-                <img src={logo} className={classes.logo} />
+                <a href='/'>
+                    <img src={logo} className={classes.logo} />
+                </a>
                 <div className={classes.center}>
                     <InputBase fullwidth placeholder="Buscar ..." inputProps={{ className: classes.input }} />
                     <SearchIcon style={{ color: '#982F27', paddingRight: '5px' }} />
                 </div>
                 <div className={classes.right}>
-                    <Typography style={{ color: '#982F27' }}>
-                        Sign in
-                    </Typography>
-                    <Avatar className={classes.avatar} />
+                    <a href='/' style={{ color: '#982F27', textDecoration:'none' }}>
+                        Rafael Martínez
+                    </a>
+                    <Avatar alt='Foto' src={foto}  className={classes.avatar}/> 
+                    
+                    
                 </div>
             </Toolbar>
         )
@@ -132,14 +140,16 @@ const useStyle = makeStyles((styles) => ({
         fontSize: "1.2rem",
     },
     right: {
-        color: "#982F27",
         display: "flex",
         alignItems: "center",
         marginLeft: styles.spacing(1),
-        padding: styles.spacing(2),
+        padding: styles.spacing(1),
+        
     },
     avatar: {
         marginLeft: styles.spacing(2),
+        width: '50px',
+         height: '50px',
     },
 }));
 
