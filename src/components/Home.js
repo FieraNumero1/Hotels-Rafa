@@ -3,7 +3,7 @@ import {Button, CssBaseline, makeStyles} from '@material-ui/core'
 import Banner from './Banner';
 import RoomCard from './RoomCard';
 import DatePicker from './DatePicker';
-
+import dataRoom from './RoomsData'
 const Home = () => {
   const classes = useStyle();
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -16,17 +16,16 @@ const Home = () => {
         <div className={classes.root}>
           <div className={classes.dates}>
             <Button className={classes.bottonsitos} onClick={()=>{setShowDatePicker(!showDatePicker)}}> {showDatePicker ? 'Cerrar':'Agendar citas'}</Button>
-            {showDatePicker &&(<DatePicker/>)}
-            
           </div>
-          <Banner/>
+          {showDatePicker &&(<DatePicker/>)}
+          <div className={classes.banner}>
+            <Banner/>
+          </div>
           <div className={classes.section}>
-            <RoomCard/>
-            <RoomCard/>
-            <RoomCard/>
-            <RoomCard/>
-            <RoomCard/>
-            <RoomCard/>
+            {dataRoom.map(({src, title, description}, index)=>(
+              <RoomCard key={index} src={src} title={title} description={description}/>
+            ))
+            }
           </div>
         </div>
       </>
@@ -35,8 +34,24 @@ const Home = () => {
 
 const useStyle = makeStyles((theme)=>({
   root: { 
-    
-
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100vw',
+  },
+  dates: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100vw',
+  },
+  banner:{
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100vw',
+  },
+  section:{
+    display: 'flex',
+    width: '100vw',
+    flexDirection: 'column',
   },
   bottonsitos: {
     top:'10px',

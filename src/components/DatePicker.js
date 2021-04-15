@@ -50,7 +50,8 @@ const useStyle = makeStyles((theme)=>({
         [theme.breakpoints.down("sm")]:{
             top: '16vh',
             left: '0vw',
-        }
+        },
+        zIndex:1,
     },
     inputSection:{
         display: 'flex',

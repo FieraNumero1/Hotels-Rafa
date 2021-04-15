@@ -1,9 +1,11 @@
 import React from 'react'
 
-const RoomCard = () => {
+const RoomCard = ({src, title, description}) => {
     return (
         <div>
-            <h3>Soy una room Card</h3>
+            <img src={src}/>
+            <h3>{title}</h3>
+            <h3>{description}</h3>
         </div>
     )
 }

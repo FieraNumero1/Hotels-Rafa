@@ -1,5 +1,5 @@
 import React from 'react'
-import backgroundImage from '../issest/img/back.jpg'
+import backgroundImage from '../issest/img/possibleBack.jpg'
 import { Button, InputBase, makeStyles, Typography } from '@material-ui/core';
 
 const Banner = () => {
@@ -7,8 +7,8 @@ const Banner = () => {
     return (
         <div className={classes.root}>
             <div className={classes.card}>
-                <h2> Planea tu descanso </h2>
-                <Button variant="contained" color="primary" disableElevation> Mira nuestras habitaciones </Button>
+                <Typography variant='h2' > Planea tu descanso </Typography>
+                <Button variant="contained" color="primary"> Nuestras habitaciones </Button>
             </div>
             
         </div>
@@ -17,29 +17,40 @@ const Banner = () => {
 
 const useStyle = makeStyles((theme)=>({
     root: {
-        top:'10px',
+        marginTop:'10px',
         height: '50vh',
+        minWidth: '500px',
         position: 'relative',
         backgroundImage: `url(${backgroundImage})`,
         backgroundPosition:'center',
         backgroundSize:'cover',
-        // zIndex:-1,
+        backgroundRepeat:'no-repeat',
+        zIndex:0,
     },
     card:{
-        width:'20vw',
-        backgroundColor:'rgba(0,0,0,0)',
-        color:'black',
+        width:'350px',
+        backgroundColor:'rgba(152,47,39,0.5)',
+        color:'white',
         textAlign:'center',
-        height:'23vh',
         transition: 'all 1s ease',
-        fontWeight:1000,
         fontSize:'35px',
+        fontWeight:'bold',
         padding: theme.spacing(1, 1, 1, 1),
-        margin: theme.spacing(1, 1, 1, 1),
+        margin: theme.spacing,
+        
         '&:hover' : {
-            backgroundColor:'rgba(152,47,39,0.5)',
-            color:'rgb(63,81,181)',
-        }
+            backgroundColor:'rgba(152,47,39,0.9)',
+            color:'white',
+            fontWeight:'bold',
+            borderBottomRightRadius: 50,
+        },
+        '& button:hover': {
+            backgroundColor:'white',
+            color:'rgb(48,63,159)',
+            fontWeight:'bold',
+            transform: 'scale(1.1)',
+        },
+    
     },
 
     botonsito:{
