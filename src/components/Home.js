@@ -4,9 +4,23 @@ import Banner from './Banner';
 import RoomCard from './RoomCard';
 import DatePicker from './DatePicker';
 import dataRoom from './RoomsData'
+
+const resetModals = (data) => data.map((room)=>({...room, show: false}));
+
 const Home = () => {
   const classes = useStyle();
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [dataCard, setDataCard] = useState(resetModals(dataRoom));
+
+  const handleModal = (index) => () => {
+    setDataCard(prev=>{
+      const result = resetModals(prev);
+      result[index].show = true;
+
+      return result;
+    })
+  }
+
   
     return (
       // react fragment
@@ -22,8 +36,8 @@ const Home = () => {
             <Banner/>
           </div>
           <div className={classes.section}>
-            {dataRoom.map(({src, title, description}, index)=>(
-              <RoomCard key={index} src={src} title={title} description={description}/>
+            {dataCard.map((data, index)=>(
+              <RoomCard key={index} {...data} showCard={handleModal(index)} />
             ))
             }
           </div>
@@ -36,23 +50,26 @@ const useStyle = makeStyles((theme)=>({
   root: { 
     display: 'flex',
     flexDirection: 'column',
-    width: '100vw',
+    width: '100%',
   },
   dates: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100vw',
+    width: '100%',
   },
   banner:{
     display: 'flex',
     flexDirection: 'column',
-    width: '100vw',
+    width: '100%',
   },
   section:{
     display: 'flex',
-    width: '100vw',
-    flexDirection: 'column',
-  },
+    width: '100%',
+    flexWrap:'wrap',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    
+    },
   bottonsitos: {
     top:'10px',
     border: '2px solid',

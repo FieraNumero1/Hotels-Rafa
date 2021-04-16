@@ -59,6 +59,7 @@ const useStyle = makeStyles((theme)=>({
         backgroundColor: '#fff',
         textAlign:'center',
         //lo que esta onda hace es que el primer button que encuentre se le aplique estas propiedades
+        '& button':{backgroundColor:'rgba(152,47,39,0.5)',},
         '& button:hover':{
             backgroundColor:"#982F27",
             color: 'white',
@@ -69,7 +70,8 @@ const useStyle = makeStyles((theme)=>({
         justifyContent:'center',
         
     },
-    input: {
+    input: {    
+        width:'6vw',
         border: '1px solid gray',
         borderRadius: '25px',
         paddingLeft: '10px',

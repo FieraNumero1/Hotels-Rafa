@@ -19,7 +19,7 @@ const useStyle = makeStyles((theme)=>({
     root: {
         marginTop:'10px',
         height: '50vh',
-        minWidth: '500px',
+        // minWidth: '500px',
         position: 'relative',
         backgroundImage: `url(${backgroundImage})`,
         backgroundPosition:'center',

@@ -1,4 +1,4 @@
-import { AppBar, Avatar, List, IconButton, InputBase, makeStyles, Toolbar, Typography,  Button } from '@material-ui/core'
+import { AppBar, Avatar, List, IconButton, InputBase, makeStyles, Toolbar, Typography,  Button, Link } from '@material-ui/core'
 import React, { useState, useEffect } from 'react'
 import logo from '../issest/img/logo.PNG'
 import foto from '../issest/img/foto.jpg'
@@ -9,6 +9,7 @@ import Drawer from '@material-ui/core/Drawer';
 const Header = () => {
 
     const [mobileView, setMobileView] = useState(true);
+    const [mobileViewAvatar, setMobileViewAvatar] = useState(true);
     const [draweropen, setDraweropen] = useState(false);
     const classes = useStyle();
 
@@ -17,6 +18,10 @@ const Header = () => {
             window.innerWidth < 900 ? setMobileView(true) : setMobileView(false);
         responsiveness();
         window.addEventListener("resize", () => responsiveness());
+        const responsivenessLogo = () =>
+            window.innerWidth < 400 ? setMobileViewAvatar(false) : setMobileViewAvatar(true);
+            responsivenessLogo();
+        window.addEventListener("resize", () => responsivenessLogo());
     }, []);
 
     const displayMobile = () => {
@@ -70,8 +75,9 @@ const Header = () => {
                     <img src={logo} className={classes.logo} alt='logo' />
                 </a>
                 <div className={classes.right}>
-                    <a href='/' style={{textDecoration:'none', color: "#982F27"}}> Rafael Martínez </a>
-                    <Avatar alt='Foto' src={foto}  className={classes.avatar}/> 
+                {mobileViewAvatar&&(<a href='/' style={{textDecoration:'none', color: "#982F27"}}> Rafael Martínez </a>)}
+                    <Link href="/" ><Avatar alt='Foto' src={foto}  className={classes.avatar}/> </Link>
+                    
                 </div>
             </Toolbar>
         );
@@ -91,7 +97,7 @@ const Header = () => {
                     <a href='/' style={{ color: '#982F27', textDecoration:'none' }}>
                         Rafael Martínez
                     </a>
-                    <Avatar alt='Foto' src={foto}  className={classes.avatar}/> 
+                    <Link href="/" ><Avatar alt='Foto' src={foto}  className={classes.avatar}/> </Link>
                     
                     
                 </div>
@@ -113,6 +119,7 @@ const useStyle = makeStyles((styles) => ({
         backgroundColor: "white",
         zIndex: 99,
         width: "100%",
+        
     },
     toolbar: {
         display: "flex",
@@ -150,6 +157,7 @@ const useStyle = makeStyles((styles) => ({
         marginLeft: styles.spacing(2),
         width: '50px',
          height: '50px',
+        
     },
 }));
 
