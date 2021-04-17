@@ -1,6 +1,6 @@
 import React from 'react'
 import backgroundImage from '../issest/img/possibleBack.jpg'
-import { Button, InputBase, makeStyles, Typography } from '@material-ui/core';
+import { Button, makeStyles, Typography } from '@material-ui/core';
 
 const Banner = () => {
     const classes = useStyle();
@@ -42,7 +42,7 @@ const useStyle = makeStyles((theme)=>({
             backgroundColor:'rgba(152,47,39,0.9)',
             color:'white',
             fontWeight:'bold',
-            borderBottomRightRadius: 50,
+            borderBottomRightRadius: 100,
         },
         '& button:hover': {
             backgroundColor:'white',

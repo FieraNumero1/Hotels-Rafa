@@ -1,4 +1,4 @@
-import { AppBar, Avatar, List, IconButton, InputBase, makeStyles, Toolbar, Typography,  Button, Link } from '@material-ui/core'
+import { AppBar, Avatar, List, IconButton, InputBase, makeStyles, Toolbar, Button, Link } from '@material-ui/core'
 import React, { useState, useEffect } from 'react'
 import logo from '../issest/img/logo.PNG'
 import foto from '../issest/img/foto.jpg'
@@ -67,7 +67,7 @@ const Header = () => {
                     }}
                 >
                     <a href='/'>
-                        <img src={logo} className={classes.logo} />
+                        <img  alt='logo' src={logo} className={classes.logo} />
                     </a>
                     <div>{getDrawerChoices()}</div>
                 </Drawer>
@@ -87,18 +87,15 @@ const Header = () => {
         return (
             <Toolbar className={classes.toolbar}>
                 <a href='/'>
-                    <img src={logo} className={classes.logo} />
+                    <img alt='logo' src={logo} className={classes.logo} />
                 </a>
                 <div className={classes.center}>
                     <InputBase fullwidth placeholder="Buscar ..." inputProps={{ className: classes.input }} />
                     <SearchIcon style={{ color: '#982F27', paddingRight: '5px' }} />
                 </div>
                 <div className={classes.right}>
-                    <a href='/' style={{ color: '#982F27', textDecoration:'none' }}>
-                        Rafael Martínez
-                    </a>
+                {mobileViewAvatar&&(<a href='/' style={{textDecoration:'none', color: "#982F27"}}> Rafael Martínez </a>)}
                     <Link href="/" ><Avatar alt='Foto' src={foto}  className={classes.avatar}/> </Link>
-                    
                     
                 </div>
             </Toolbar>
@@ -141,6 +138,13 @@ const useStyle = makeStyles((styles) => ({
             display: "none",
         },
     },
+    name: {
+        [styles.breakpoints.down("xs")]: {
+            display: "none",
+        },
+        color: '#982F27', 
+        textDecoration:'none',
+    },
     input: {
         color: '#982F27',
         padding: styles.spacing(1, 2, 1, 2),
@@ -151,6 +155,7 @@ const useStyle = makeStyles((styles) => ({
         alignItems: "center",
         marginLeft: styles.spacing(1),
         padding: styles.spacing(1),
+        
         
     },
     avatar: {

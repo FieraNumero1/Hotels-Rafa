@@ -6,41 +6,67 @@ import img5 from '../issest/img/golden.jpg'
 import img6 from '../issest/img/futureRoom.jpg'
 import img7 from '../issest/img/cokingRoom.jpg'
 import img8 from '../issest/img/castle.jpg'
+import img9 from '../issest/img/bar.jpg'
 
 const dataRoom = [
     {   src: img1,
         title: 'Habitación bajo el agua',
         description: 'Description',
+        cat:'room',
+        prize:150,
     },
     {   src: img2,
         title: 'Balneario interno',
         description: 'Description',
+        cat:'pool',
     },
     {   src: img3,
         title: 'Habitación vista al mar',
         description: 'Description',
+        cat:'room',
+        prize:250,
     },
     {   src: img4,
         title: 'Piscina de lujo',
         description: 'Description',
+        cat:'pool',
     },
     {   src: img5,
         title: 'Habitación golden',
         description: 'Description',
+        cat:'room',
+        prize:500,
     },
     {   src: img6,
         title: 'Habitación gamer',
         description: 'Description',
+        cat:'room',
+        prize:200,
     },
     {   src: img7,
         title: 'Restaurante',
         description: 'Description',
+        cat: 'kitchen',
     },
     {   src: img8,
         title: 'Habitación castillo',
         description: 'Description',
+        cat:'room',
+        prize:100,
+    },
+    {   src: img9,
+        title: 'Bar',
+        description: 'Description',
+        cat: 'bar',
     },
     
+]
+export const dataFilter = [
+    {ket:0, label: "Cancelation Flexible"},
+    {ket:1, label: "Standard rooms"},
+    {ket:2, label: "Executive rooms"},
+    {ket:3, label: "Access to louge"},
+    {ket:4, label: "More filter"},
 ]
 
 export default dataRoom;
