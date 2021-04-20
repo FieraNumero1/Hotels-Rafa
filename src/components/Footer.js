@@ -18,19 +18,13 @@ export const Footer = () => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        borderTop: '1px solid gray',
-        marginTop: '1vh',
         textAlign: 'center',
-        fontFamily:'italic',
-        color: 'black',
+        fontFamily: 'italic',
         textDecoration: 'none',
-        transition: 'all 1s ease',
-        
-        '&:hover' : {
-            backgroundColor:'rgba(152,47,39,0.5)',
-            boxShadow:'5px 10px 5px 15px gray',
-            color:"white",
-            fontWeight:'bold',
-        }
+        marginBottom: 0,
+        backgroundColor: 'rgba(152,47,39,0.5)',
+        boxShadow: '1px 1px 5px 5px gray',
+        color: "white",
+        fontWeight: 'bold',
     },
 }))

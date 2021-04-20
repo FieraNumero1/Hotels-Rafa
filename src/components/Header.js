@@ -20,7 +20,7 @@ const Header = () => {
         window.addEventListener("resize", () => responsiveness());
         const responsivenessLogo = () =>
             window.innerWidth < 400 ? setMobileViewAvatar(false) : setMobileViewAvatar(true);
-            responsivenessLogo();
+        responsivenessLogo();
         window.addEventListener("resize", () => responsivenessLogo());
     }, []);
 
@@ -39,8 +39,8 @@ const Header = () => {
             return headersData.map((data) => {
                 return (
                     <List>
-                        <Button variant="contained" onClick={() => { alert('pulsado') }}  style={{ backgroundColor: 'white', width: '100%', color: "#982F27"}}> 
-                        {data} {/* Aqui podemos hacer un onClick y aqui en el meter en el array el navigator */}
+                        <Button variant="contained" onClick={() => { alert('pulsado') }} style={{ backgroundColor: 'white', width: '100%', color: "#982F27" }}>
+                            {data} {/* Aqui podemos hacer un onClick y aqui en el meter en el array el navigator */}
                         </Button>
                     </List>
                 );
@@ -57,7 +57,7 @@ const Header = () => {
                         onClick: handleDrawerOpen,
                     }}
                 >
-                    <MenuIcon style={{color:'#982F27'}} fontSize='large' />
+                    <MenuIcon style={{ color: '#982F27' }} fontSize='large' />
                 </IconButton>
                 <Drawer
                     {...{
@@ -67,7 +67,7 @@ const Header = () => {
                     }}
                 >
                     <a href='/'>
-                        <img  alt='logo' src={logo} className={classes.logo} />
+                        <img alt='logo' src={logo} className={classes.logo} />
                     </a>
                     <div>{getDrawerChoices()}</div>
                 </Drawer>
@@ -75,9 +75,9 @@ const Header = () => {
                     <img src={logo} className={classes.logo} alt='logo' />
                 </a>
                 <div className={classes.right}>
-                {mobileViewAvatar&&(<a href='/' style={{textDecoration:'none', color: "#982F27"}}> Rafael Martínez </a>)}
-                    <Link href="/" ><Avatar alt='Foto' src={foto}  className={classes.avatar}/> </Link>
-                    
+                    {mobileViewAvatar && (<a href='/' style={{ textDecoration: 'none', color: "#982F27" }}> Rafael Martínez </a>)}
+                    <Link href="/" ><Avatar alt='Foto' src={foto} className={classes.avatar} /> </Link>
+
                 </div>
             </Toolbar>
         );
@@ -94,9 +94,9 @@ const Header = () => {
                     <SearchIcon style={{ color: '#982F27', paddingRight: '5px' }} />
                 </div>
                 <div className={classes.right}>
-                {mobileViewAvatar&&(<a href='/' style={{textDecoration:'none', color: "#982F27"}}> Rafael Martínez </a>)}
-                    <Link href="/" ><Avatar alt='Foto' src={foto}  className={classes.avatar}/> </Link>
-                    
+                    {mobileViewAvatar && (<a href='/' style={{ textDecoration: 'none', color: "#982F27" }}> Rafael Martínez </a>)}
+                    <Link href="/" ><Avatar alt='Foto' src={foto} className={classes.avatar} /> </Link>
+
                 </div>
             </Toolbar>
         )
@@ -116,7 +116,7 @@ const useStyle = makeStyles((styles) => ({
         backgroundColor: "white",
         zIndex: 99,
         width: "100%",
-        
+
     },
     toolbar: {
         display: "flex",
@@ -142,8 +142,8 @@ const useStyle = makeStyles((styles) => ({
         [styles.breakpoints.down("xs")]: {
             display: "none",
         },
-        color: '#982F27', 
-        textDecoration:'none',
+        color: '#982F27',
+        textDecoration: 'none',
     },
     input: {
         color: '#982F27',
@@ -155,14 +155,14 @@ const useStyle = makeStyles((styles) => ({
         alignItems: "center",
         marginLeft: styles.spacing(1),
         padding: styles.spacing(1),
-        
-        
+
+
     },
     avatar: {
         marginLeft: styles.spacing(2),
         width: '50px',
-         height: '50px',
-        
+        height: '50px',
+
     },
 }));
 

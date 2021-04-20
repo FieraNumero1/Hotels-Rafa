@@ -30,12 +30,11 @@ const SearchPage = () => {
 
     return (
         <div className={classes.root}>
-            <Typography variante='h2' className={classes.text1} gutterBottom> Habitaciones disponibles
+            <Typography variante='h2' style={{marginTop:10}} className={classes.textos}> Habitaciones disponibles
              </Typography>
             <div className={classes.chips}>
                 {
                     dataFilter.map(data => {
-                        //  let icono = <HighlightOffTwoTone/>
                         const handleDelete = () => {
                             swal("Ups!", "No podemos remover los filtros", "warning");
                         };
@@ -49,16 +48,20 @@ const SearchPage = () => {
                     })
                 }
             </div>
-            <Typography variante='h3' className={classes.text1} gutterBottom> 
-                Precio
-            </Typography>
-            
+            <div className={classes.textos}>
+            <p>
+                    Precio &nbsp;
+            </p>
+            <p >
+                    ${money}
+            </p>
+            </div>
             <div className={classes.slider}>
                 <Link onClick={() => isntThereMoney()}>
                     <MoneyOffIcon style={{ color: '#A2443D', fontSize: 35 }} />
                 </Link>
-                
-                
+
+
                 <Slider
                     style={{ color: '#A2443D' }}
                     valueLabelDisplay
@@ -71,18 +74,16 @@ const SearchPage = () => {
                 <Link onClick={() => isThereMoney()}>
                     <AttachMoneyIcon style={{ color: '#A2443D', fontSize: 35 }} />
                 </Link>
-                <Typography variante='h3' style={{ color: '#A2443D', fontSize: 25 }} > 
-                {money}
-                </Typography>
+
             </div>
             <div className={classes.cards}>
                 {
                     dataRoom
                         .filter((data) => (data.cat === "room" && data.prize <= money))
                         .map(({ src, title, description, prize, stock }) => (
-                        <Results title={title} description={description} src={src} prize={prize} stock={stock}/>                    
-                ))
-            }
+                            <Results title={title} description={description} src={src} prize={prize} stock={stock} />
+                        ))
+                }
             </div>
         </div >
     )
@@ -96,17 +97,17 @@ const useStyles = makeStyles((theme) => ({
         padding: '0px',
         margin: '0px',
         backgroundImage: `url(${backgroundImage})`,
-        backgroundPosition:'center',
-        backgroundSize:'cover',
-        backgroundRepeat:'no-repeat',
-        boxShadow:'none',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        boxShadow: 'none',
     },
     chipInside: {
         backgroundColor: 'rgba(152,47,39,0.9)',
         textAlign: 'center',
         color: 'white',
         transition: 'all 1s ease',
-        margin: "1vw",
+        margin: "2vw",
         fontWeight: 'bold',
         '&:hover': {
             backgroundColor: 'rgba(152,47,39,0.5)',
@@ -114,13 +115,25 @@ const useStyles = makeStyles((theme) => ({
             color: "white",
         }
     },
-    card:{
-        border:'none',
+    card: {
+        border: 'none',
     },
-    text1: {
-    margin:theme.spacing(1),
-    fontSize:'1.5rem',
-    fontWeight: 400,
+    textos: {
+        width:'50%',
+        display: 'flex',
+        flexDirection: 'row',
+        textAlign: 'center', 
+        justifyContent: 'left',
+        marginLeft: '2vw',
+        alignItems: 'center', 
+        color: '#A2443D', 
+        fontSize: '25px',
+        "@media (max-width: 600px)": {
+            width: '100%',
+            justifyContent: 'center',
+        },
+        // fontWeight: 'bold'
+        
     },
     slider: {
         display: 'flex',

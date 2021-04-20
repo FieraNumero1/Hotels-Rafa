@@ -102,7 +102,6 @@ const useStyles = makeStyles((theme) => ({
             color:'white',
             fontWeight:'bold',
             borderRadius: '25px',
-            // transform: 'scale(1.1)'
         },
     },
     people: {

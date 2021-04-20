@@ -5,16 +5,16 @@ import { Paper, Typography } from '@material-ui/core';
 const Results = ({ src, title, description, prize, stock }) => {
     const classes = useStyles();
     return (
-        <Paper  elevation={0} className={classes.root}>
+        <Paper elevation={0} className={classes.root}>
             <div className={classes.background}>
                 <div className={classes.left}>
-                    <img  className={classes.image} src={src} alt={title} />
+                    <img className={classes.image} src={src} alt={title} />
                 </div>
                 <div className={classes.right}>
-                    <Typography style={{ fontWeight:1000}} variant="h4">{title}</Typography> 
-                    <Typography  variant="h5">{description}</Typography> 
-                    <Typography  variant="h5"> Precio por noche $<span  className={classes.number}>{prize}</span></Typography> 
-                    <Typography  variant="h5">Habitaciones disponibles <span className={classes.number}> {stock} </span></Typography> 
+                    <Typography style={{ fontWeight: 1000 }} variant="h4">{title}</Typography>
+                    <Typography variant="h5">{description}</Typography>
+                    <Typography variant="h5"> Precio por noche $<span className={classes.number}>{prize}</span></Typography>
+                    <Typography variant="h5">Habitaciones disponibles <span className={classes.number}> {stock} </span></Typography>
                 </div>
             </div>
         </Paper>
@@ -26,20 +26,15 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-       
+
         [theme.breakpoints.down("xs")]: {
             flexDirection: 'column',
             textAlign: 'center',
             justifyContent: 'center',
         },
-        flexWrap:'wrap',
-        background:'transparent',
-        // background: 'rgba(255,255,255,0.1)',
-        // borderRadius: '10px',
-        // border: '2px solid white',
-        // marginBottom:5,
-        
-        
+        flexWrap: 'wrap',
+        background: 'transparent',
+        marginBottom: 25,
     },
     background: {
         display: 'flex',
@@ -48,10 +43,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         borderRadius: '10px',
         transition: 'all 0.5s ease',
-        '&:hover' : {
-            border:'2px solid #A2433C',
+        '&:hover': {
+            border: '2px solid #A2433C',
             background: 'rgba(0,0,0,0.1)',
-            // color:'white',
         },
         [theme.breakpoints.down("xs")]: {
             flexDirection: 'column',
@@ -59,13 +53,13 @@ const useStyles = makeStyles((theme) => ({
             justifyContent: 'center',
         },
     },
-   
+
     left: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         width: '50%',
-        
+
     },
     right: {
         display: 'flex',
@@ -74,33 +68,33 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'left',
         width: '50%',
         fontWeight: 1000,
+        color:'#A2433C',
         "@media (max-width: 600px)": {
-            width:'100%',
+            width: '100%',
             alignItems: 'center',
-          },
-          marginBottom:'50px',
+        },
+        marginBottom: '50px',
     },
     image: {
-        width:'75%',
+        width: '75%',
         height: 'auto',
         borderRadius: '10px',
         "@media (max-width: 600px)": {
-            width:'300px',
-          },
-          "@media (max-width: 400px)": {
-            width:'200px',
-          },
-        marginBottom:'50px',
-        marginTop:'50px',
+            width: '300px',
+        },
+        "@media (max-width: 400px)": {
+            width: '200px',
+        },
+        marginBottom: '50px',
+        marginTop: '50px',
         transition: 'all 1s ease',
-        '&:hover' : {
-            boxShadow:'5px 10px gray',
+        '&:hover': {
+            boxShadow: '5px 10px gray',
             transform: 'scale(1.1)',
         }
     },
     number: {
-        // fontWeight:'bold',
-        marginLeft:theme.spacing(0.5),
+        marginLeft: theme.spacing(0.5),
     },
 }))
 
