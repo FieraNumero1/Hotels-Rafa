@@ -2,19 +2,20 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Typography } from '@material-ui/core';
 
-
 const Results = ({ src, title, description, prize, stock }) => {
     const classes = useStyles();
     return (
-        <Paper className={classes.root}>
-            <div className={classes.left}>
-                <img  className={classes.image} src={src} alt={title} />
-            </div>
-            <div className={classes.right}>
-                <Typography variant="h5">{title}</Typography> 
-                <Typography variant="body1">{description}</Typography> 
-                <Typography variant="body1"> Precio por noche $<span className={classes.number}>{prize}</span></Typography> 
-                <Typography variant="body1">Habitaciones disponibles <span className={classes.number}> {stock} </span></Typography> 
+        <Paper  elevation={0} className={classes.root}>
+            <div className={classes.background}>
+                <div className={classes.left}>
+                    <img  className={classes.image} src={src} alt={title} />
+                </div>
+                <div className={classes.right}>
+                    <Typography style={{ fontWeight:1000}} variant="h4">{title}</Typography> 
+                    <Typography  variant="h5">{description}</Typography> 
+                    <Typography  variant="h5"> Precio por noche $<span  className={classes.number}>{prize}</span></Typography> 
+                    <Typography  variant="h5">Habitaciones disponibles <span className={classes.number}> {stock} </span></Typography> 
+                </div>
             </div>
         </Paper>
     )
@@ -23,42 +24,83 @@ const Results = ({ src, title, description, prize, stock }) => {
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
+        alignItems: 'center',
+       
+        [theme.breakpoints.down("xs")]: {
+            flexDirection: 'column',
+            textAlign: 'center',
+            justifyContent: 'center',
+        },
+        flexWrap:'wrap',
+        background:'transparent',
+        // background: 'rgba(255,255,255,0.1)',
+        // borderRadius: '10px',
+        // border: '2px solid white',
+        // marginBottom:5,
+        
+        
+    },
+    background: {
+        display: 'flex',
+        width: '80%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: '10px',
+        transition: 'all 0.5s ease',
+        '&:hover' : {
+            border:'2px solid #A2433C',
+            background: 'rgba(0,0,0,0.1)',
+            // color:'white',
+        },
         [theme.breakpoints.down("xs")]: {
             flexDirection: 'column',
             textAlign: 'center',
             justifyContent: 'center',
         },
     },
+   
     left: {
-        margin: theme.spacing(2,5,5,5),
-        maxWidth:'50%',
-        [theme.breakpoints.down("xs")]: {
-            
-            justifyContent: 'center',    
-            display: 'absolute',
-            alignItems: 'center',
-        },
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '50%',
+        
     },
     right: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        margin: theme.spacing(2,5,5,5),
-        
-        [theme.breakpoints.down("xs")]: {
-            flexWrap:'wrap',
-        },
+        alignItems: 'left',
+        width: '50%',
+        fontWeight: 1000,
+        "@media (max-width: 600px)": {
+            width:'100%',
+            alignItems: 'center',
+          },
+          marginBottom:'50px',
     },
     image: {
-        maxWidth:'400px',
+        width:'75%',
         height: 'auto',
         borderRadius: '10px',
+        "@media (max-width: 600px)": {
+            width:'300px',
+          },
+          "@media (max-width: 400px)": {
+            width:'200px',
+          },
+        marginBottom:'50px',
+        marginTop:'50px',
+        transition: 'all 1s ease',
+        '&:hover' : {
+            boxShadow:'5px 10px gray',
+            transform: 'scale(1.1)',
+        }
     },
     number: {
-        fontWeight:'bold',
-        marginLeft:theme.spacing(1),
-        fontSize:'1.1rem',
+        // fontWeight:'bold',
+        marginLeft:theme.spacing(0.5),
     },
 }))
 

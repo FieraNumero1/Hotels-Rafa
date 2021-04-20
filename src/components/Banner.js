@@ -1,14 +1,16 @@
 import React from 'react'
 import backgroundImage from '../issest/img/possibleBack.jpg'
 import { Button, makeStyles, Typography } from '@material-ui/core';
+import { useHistory} from 'react-router-dom'
 
 const Banner = () => {
+    const history = useHistory();
     const classes = useStyle();
     return (
         <div className={classes.root}>
             <div className={classes.card}>
                 <Typography variant='h2' > Planea tu descanso </Typography>
-                <Button variant="contained" color="primary"> Nuestras habitaciones </Button>
+                <Button onClick={() => history.push('/search')} variant="contained" color="primary"> Nuestras habitaciones </Button>
             </div>
             
         </div>
@@ -29,6 +31,9 @@ const useStyle = makeStyles((theme)=>({
     },
     card:{
         width:'350px',
+        "@media (max-width: 400px)": {
+            width:'100%',
+          },
         backgroundColor:'rgba(152,47,39,0.5)',
         color:'white',
         textAlign:'center',

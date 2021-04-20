@@ -4,6 +4,7 @@ import Banner from './Banner';
 import RoomCard from './RoomCard';
 import DatePicker from './DatePicker';
 import dataRoom from './RoomsData'
+import backgroundImage from '../issest/img/fondo.1.svg'
 
 const resetModals = (data) => data.map((room)=>({...room, show: false}));
 
@@ -48,9 +49,15 @@ const Home = () => {
 
 const useStyle = makeStyles((theme)=>({
   root: { 
+    padding: 0,
+    margin: 0,
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundPosition:'fixed',
+    backgroundSize:'cover',
+    backgroundRepeat:'no-repeat',
   },
   dates: {
     display: 'flex',
@@ -68,7 +75,6 @@ const useStyle = makeStyles((theme)=>({
     flexWrap:'wrap',
     justifyContent: 'center',
     flexDirection: 'row',
-    
     },
   bottonsitos: {
     top:'10px',

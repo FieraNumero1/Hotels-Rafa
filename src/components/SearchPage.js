@@ -8,6 +8,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import Results from './Results';
 import dataRoom from './RoomsData'
+import backgroundImage from '../issest/img/fondo.1.svg'
 
 const SearchPage = () => {
     const classes = useStyles();
@@ -29,7 +30,7 @@ const SearchPage = () => {
 
     return (
         <div className={classes.root}>
-            <Typography variante='h5' gutterBottom> Available Rooms
+            <Typography variante='h2' className={classes.text1} gutterBottom> Habitaciones disponibles
              </Typography>
             <div className={classes.chips}>
                 {
@@ -48,11 +49,16 @@ const SearchPage = () => {
                     })
                 }
             </div>
+            <Typography variante='h3' className={classes.text1} gutterBottom> 
+                Precio
+            </Typography>
+            
             <div className={classes.slider}>
                 <Link onClick={() => isntThereMoney()}>
                     <MoneyOffIcon style={{ color: '#A2443D', fontSize: 35 }} />
                 </Link>
-
+                
+                
                 <Slider
                     style={{ color: '#A2443D' }}
                     valueLabelDisplay
@@ -65,8 +71,11 @@ const SearchPage = () => {
                 <Link onClick={() => isThereMoney()}>
                     <AttachMoneyIcon style={{ color: '#A2443D', fontSize: 35 }} />
                 </Link>
+                <Typography variante='h3' style={{ color: '#A2443D', fontSize: 25 }} > 
+                {money}
+                </Typography>
             </div>
-            <div>
+            <div className={classes.cards}>
                 {
                     dataRoom
                         .filter((data) => (data.cat === "room" && data.prize <= money))
@@ -86,21 +95,32 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         padding: '0px',
         margin: '0px',
-
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundPosition:'center',
+        backgroundSize:'cover',
+        backgroundRepeat:'no-repeat',
+        boxShadow:'none',
     },
     chipInside: {
+        backgroundColor: 'rgba(152,47,39,0.9)',
         textAlign: 'center',
-        color: 'black',
+        color: 'white',
         transition: 'all 1s ease',
         margin: "1vw",
+        fontWeight: 'bold',
         '&:hover': {
             backgroundColor: 'rgba(152,47,39,0.5)',
             boxShadow: '1px 1px 1px 1px gray',
             color: "white",
         }
     },
-    chips: {
-
+    card:{
+        border:'none',
+    },
+    text1: {
+    margin:theme.spacing(1),
+    fontSize:'1.5rem',
+    fontWeight: 400,
     },
     slider: {
         display: 'flex',
