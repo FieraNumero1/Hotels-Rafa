@@ -1,23 +1,14 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Paper, Typography } from '@material-ui/core';
+import {  Paper, Typography } from '@material-ui/core';
 import * as moment from 'moment';
 import 'moment/locale/es'  // without this line it didn't work
-import { useSelector } from 'react-redux';
-import { selectStart } from '../features/startSlice';
-import { selectEnd } from '../features/endSlice';
-import swal from 'sweetalert';
 
-const Results = ({ src, title, description, prize, stock, disableStart, disableEnd }) => {
+
+
+const CardSingle = ({ src, title, description, prize, stock, disableStart, disableEnd }) => {
     const classes = useStyles();
-    const start = useSelector(selectStart);
-    const end = useSelector(selectEnd);
-    let todayHere = new Date()
-    let dataRedux = moment(end).format('DD [de] MMMM [del] YYYY')
-    let today = moment(todayHere).format('DD [de] MMMM [del] YYYY')
-    const handleReservation = () => {
-        swal(dataRedux ===  today ? "Advertencia": "Reservado!", dataRedux ===  today ? "Debe agendar una reserva agregando los dias a utilizar la habitación y cantidad de personas a utilizarla":'Reserva realizada con exito' , dataRedux ===  today ? "warning":"success");
-    };
+
     return (
         <Paper elevation={0} className={classes.root}>
             <div className={classes.background}>
@@ -27,12 +18,18 @@ const Results = ({ src, title, description, prize, stock, disableStart, disableE
                 <div className={classes.right}>
                     <Typography style={{ fontWeight: 1000 }} variant="h4">{title}</Typography>
                     <Typography variant="h5">{description}</Typography>
-                    <Typography variant="h5"> Precio por noche $<span className={classes.number}>{prize}</span></Typography>
-                    <Typography variant="h5">Habitaciones disponibles <span className={classes.number}> {stock} </span></Typography>
-                    <Typography variant="h5">No disponible desde <span style={{fontWeight:'bold'}}> {moment(disableStart).format('DD [de] MMMM [del] YYYY')} </span> hasta <span style={{fontWeight:'bold'}}> {moment(disableEnd).format('DD [de] MMMM [del] YYYY')} </span></Typography>
-                    { 
-                    end<disableStart.valueOf() || start > disableEnd.valueOf() ? (<Button variant="contained" onClick={handleReservation} className={classes.botonsito} > Realizar reserva </Button>):(<Button variant="contained" color="primary" disabled> Realizar reserva</Button>)
+                    {
+                        prize ? (<Typography variant="h5"> Precio por noche $<span className={classes.number}>{prize}</span></Typography>) : ''
                     }
+                    {
+                        stock ? (<Typography variant="h5">Habitaciones disponibles <span className={classes.number}> {stock} </span></Typography>):''
+                    }
+                    
+                    {
+                        disableStart ? (<Typography variant="h5">Habitación reservada desde <span style={{fontWeight:'bold'}}> {moment(disableStart).format('DD [de] MMMM [del] YYYY')} </span> hasta <span style={{fontWeight:'bold'}}> {moment(disableEnd).format('DD [de] MMMM [del] YYYY')} </span></Typography>):''
+                    }
+                    
+                    
                 </div>
             </div>
         </Paper>
@@ -137,5 +134,4 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default Results
-
+export default CardSingle

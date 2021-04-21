@@ -17,6 +17,8 @@ const dataRoom = [
         cat: 'room',
         prize: 150,
         stock: 5,
+        notAvailableStart: new Date (2021, 4, 15),
+        notAvailableEnd: new Date (2021, 4, 20),
     },
     {
         src: img2,
@@ -31,6 +33,8 @@ const dataRoom = [
         cat: 'room',
         prize: 250,
         stock: 2,
+        notAvailableStart: new Date (2021, 4, 5),
+        notAvailableEnd: new Date (2021, 4, 10),
     },
     {
         src: img4,
@@ -45,6 +49,8 @@ const dataRoom = [
         cat: 'room',
         prize: 500,
         stock: 1,
+        notAvailableStart: new Date (2021, 4, 30),
+        notAvailableEnd: new Date (2021, 4, 30),
     },
     {
         src: img6,
@@ -53,6 +59,8 @@ const dataRoom = [
         cat: 'room',
         prize: 200,
         stock: 6,
+        notAvailableStart: new Date (2021, 4, 20),
+        notAvailableEnd: new Date (2021, 4, 22),
     },
     {
         src: img7,
@@ -67,6 +75,8 @@ const dataRoom = [
         cat: 'room',
         prize: 100,
         stock: 8,
+        notAvailableStart: new Date (2021, 4, 30),
+        notAvailableEnd: new Date (2021, 5, 2),
     },
     {
         src: img9,

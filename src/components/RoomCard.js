@@ -8,9 +8,13 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Lightbox } from "react-modal-image";
+import { useHistory } from 'react-router-dom'
 
-const RoomCard = ({ src, title, description, show, showCard }) => {
+const RoomCard = ({ src, title, description, cat, prize, stock, notAvailableStart, notAvailableEnd  }) => {
+    
     const classes = useStyles();
+    const history = useHistory();
+
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -20,7 +24,9 @@ const RoomCard = ({ src, title, description, show, showCard }) => {
     const handleClose = () => {
       setOpen(false);
     };
-   
+    const setDataCard = () => {
+        history.push('/view', { src, title, description, cat, prize, stock, notAvailableStart, notAvailableEnd  } )
+    }
     
     return (
             <>
@@ -47,8 +53,9 @@ const RoomCard = ({ src, title, description, show, showCard }) => {
                     {/* <Button  variant="contained" color="primary">
                         Share
                     </Button> */}
-                    <Button size="small" variant="outlined"  className={classes.botonCard}>
-                        Ver habitación
+                    <Button size="small" variant="outlined"  className={classes.botonCard} onClick={setDataCard}>
+                        {cat==='room' ? 'Ver habitación':' Ver sala' }
+                        
                     </Button>
                 </CardActions>
                 

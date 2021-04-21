@@ -10,6 +10,7 @@ const Banner = () => {
         <div className={classes.root}>
             <div className={classes.card}>
                 <Typography variant='h2' > Planea tu descanso </Typography>
+                {/* cambiar en el onClick poner la data del redux en date inicial */}
                 <Button onClick={() => history.push('/search')} variant="contained" color="primary"> Nuestras habitaciones </Button>
             </div>
 
@@ -46,7 +47,7 @@ const useStyle = makeStyles((theme) => ({
             backgroundColor: 'rgba(152,47,39,0.9)',
             color: 'white',
             fontWeight: 'bold',
-            borderBottomRightRadius: 100,
+            borderBottomRightRadius: 75,
         },
         '& button:hover': {
             backgroundColor: 'white',

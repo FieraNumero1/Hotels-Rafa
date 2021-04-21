@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { dataFilter } from './RoomsData';
 import { Chip, Link, Slider } from '@material-ui/core';
@@ -7,31 +7,45 @@ import swal from 'sweetalert';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import Results from './Results';
-import dataRoom from './RoomsData'
-import backgroundImage from '../issest/img/fondo.1.svg'
+import dataRoom from './RoomsData';
+import backgroundImage from '../issest/img/fondo.1.svg';
+import { useSelector } from 'react-redux';
+import { selectStart } from '../features/startSlice';
+import { selectEnd } from '../features/endSlice';
+import * as moment from 'moment';
+import 'moment/locale/es'  // without this line it didn't work
 
 const SearchPage = () => {
     const classes = useStyles();
+    const start = useSelector(selectStart);
+    const end = useSelector(selectEnd);
+
     const [money, setMoney] = useState(100);
     const isThereMoney = () => {
-        setMoney(money + 100)
+        if(money<500){
+            setMoney(money + 100)
+        }
+        
     }
     const isntThereMoney = () => {
-        setMoney(money - 100)
+        if(money>100){
+            setMoney(money - 100)
+        }
     }
     const handleChange = (event, value) => {
         setMoney(value);
     };
-
-    useEffect(() => {
-        console.log('data', money)
-    }, [money])
-
-
+    let todayHere = new Date()
+    
+    let dataRedux = moment(end).format('DD [de] MMMM [del] YYYY')
+    let today = moment(todayHere).format('DD [de] MMMM [del] YYYY')
     return (
         <div className={classes.root}>
             <Typography variante='h2' style={{marginTop:10}} className={classes.textos}> Habitaciones disponibles
              </Typography>
+             {dataRedux ===  today ? '':(<Typography variante='h2' style={{marginTop:10}} className={classes.subtitle}> Fecha seleccionada desde {moment(start).format('DD [de] MMMM [del] YYYY')} hasta {moment(end).format('DD [de] MMMM [del] YYYY')}
+             </Typography>)}
+            
             <div className={classes.chips}>
                 {
                     dataFilter.map(data => {
@@ -57,10 +71,14 @@ const SearchPage = () => {
             </p>
             </div>
             <div className={classes.slider}>
-                <Link onClick={() => isntThereMoney()}>
+                
+                <Link style={{cursor:'pointer'}} onClick={() => isntThereMoney()}> 
+                <p style={{ color: '#A2443D',fontSize: 20 }}>
+                        -100
+                </p>
                     <MoneyOffIcon style={{ color: '#A2443D', fontSize: 35 }} />
                 </Link>
-
+                
 
                 <Slider
                     style={{ color: '#A2443D' }}
@@ -71,17 +89,22 @@ const SearchPage = () => {
                     onChange={handleChange}
                     aria-labelledby="continuous-slider" />
 
-                <Link onClick={() => isThereMoney()}>
-                    <AttachMoneyIcon style={{ color: '#A2443D', fontSize: 35 }} />
+                <Link style={{cursor:'pointer'}} onClick={() => isThereMoney()}>
+                <p style={{ color: '#A2443D',fontSize: 20 }}>
+                        +100
+                </p>
+                    &nbsp; <AttachMoneyIcon style={{ color: '#A2443D', fontSize: 35 }} />
                 </Link>
+                
 
             </div>
             <div className={classes.cards}>
                 {
                     dataRoom
                         .filter((data) => (data.cat === "room" && data.prize <= money))
-                        .map(({ src, title, description, prize, stock }) => (
-                            <Results title={title} description={description} src={src} prize={prize} stock={stock} />
+                        // .filter((data) => end < data.notAvailableStart.valueOf() || start > data.notAvailableEnd.valueOf() )
+                        .map(({ src, title, description, prize, stock, notAvailableStart, notAvailableEnd }) => (
+                            <Results title={title} description={description} src={src} prize={prize} stock={stock} disableStart={notAvailableStart} disableEnd={notAvailableEnd} />
                         ))
                 }
             </div>
@@ -122,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
         width:'50%',
         display: 'flex',
         flexDirection: 'row',
-        textAlign: 'center', 
+        // textAlign: 'center', 
         justifyContent: 'left',
         marginLeft: '2vw',
         alignItems: 'center', 
@@ -131,9 +154,26 @@ const useStyles = makeStyles((theme) => ({
         "@media (max-width: 600px)": {
             width: '100%',
             justifyContent: 'center',
+            marginLeft: '0vw',
+            textAlign: 'center', 
         },
-        // fontWeight: 'bold'
-        
+    },
+    subtitle: {
+        width:'100%',
+        display: 'flex',
+        flexDirection: 'row',
+        // textAlign: 'center', 
+        justifyContent: 'left',
+        marginLeft: '2vw',
+        alignItems: 'center', 
+        color: '#A2443D', 
+        fontSize: '25px',
+        "@media (max-width: 600px)": {
+            width: '100%',
+            justifyContent: 'center',
+            marginLeft: '0vw',
+            textAlign: 'center', 
+        },
     },
     slider: {
         display: 'flex',
