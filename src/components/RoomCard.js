@@ -80,11 +80,15 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 300,
         width: '25%',
         justifyContent: 'space-around',
-        transition: 'all 1s ease',
+        transition: 'all 0.3s ease',
         '&:hover' : {
             boxShadow:'5px 10px gray',
             transform: 'scale(1.1)',
-        }
+        },
+        "@media (max-width: 900px)": {
+            marginTop:25,
+            marginBottom:25,
+          },
         
     },
     inputSection: {

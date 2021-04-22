@@ -17,6 +17,10 @@ const View = () => {
         dispatch(setSearch('...123'));
     },[])
 
+    useEffect(() => {
+        return () => dispatch(setSearch(''));
+    },[])
+
     if (!history.location.state?.src) {
         history.replace('/')
         return null;

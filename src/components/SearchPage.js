@@ -41,6 +41,10 @@ const SearchPage = () => {
     useEffect(() => {
             dispatch(setSearch('...123'));
     },[])
+
+    useEffect(() => {
+            return () => dispatch(setSearch(''));
+    },[])
     let todayHere = new Date()
     
     let dataRedux = moment(end).format('DD [de] MMMM [del] YYYY')

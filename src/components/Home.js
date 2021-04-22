@@ -93,6 +93,7 @@ const useStyle = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'center',
     flexDirection: 'row',
+    
   },
   bottonsitos: {
     top: '10px',
