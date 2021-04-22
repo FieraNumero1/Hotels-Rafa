@@ -1,38 +1,28 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
-import CardSingle from './CardSingle'
 import backgroundImage from '../issest/img/fondo.1.svg';
-import { useDispatch  } from 'react-redux';
 import { useHistory } from 'react-router-dom'
-import { setSearch } from '../features/searchSlice';
+import FormSingle from './FormSingle'
 
-const View = () => {
+const FormSuscribe = () => {
     const classes = useStyles();
     const history = useHistory();
-    const dispatch = useDispatch();
-    
-    useEffect(() => {
-        dispatch(setSearch('...123'));
-    },[])
 
     if (!history.location.state?.src) {
-        history.replace('/')
+        history.replace('/');
         return null;
     }
-
-    
 
     return (
         <div className={classes.root}>
 
-            <Typography variante='h1' className={classes.textos}>{history.location.state.cat === 'room' ? 'Habitaciones de nuestro hotel' : 'Entretenimiento de nuestro hotel'}
-            </Typography>
+            <Typography variante='h1' className={classes.textos}> Formulario de solicitud de reserva
+                </Typography>
 
             <div className={classes.cards}>
 
-                <CardSingle title={history.location.state.title} description={history.location.state.description} src={history.location.state.src} prize={history.location.state.prize} stock={history.location.state.stock} disableStart={history.location.state.notAvailableStart} disableEnd={history.location.state.notAvailableEnd} />
+                <FormSingle src={history.location.state.src} title={history.location.state.title} />
             </div>
         </div >
     )
@@ -68,12 +58,12 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '50px',
         marginBottom: '50px',
         "@media (max-width: 600px)": {
-            marginTop: '25px',
-            marginBottom: '15px',
             width: '100%',
             justifyContent: 'center',
             marginLeft: '0vw',
             textAlign: 'center',
+            marginTop: '25px',
+            marginBottom: '25px',
         },
     },
     cards: {
@@ -82,4 +72,4 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default View
+export default FormSuscribe

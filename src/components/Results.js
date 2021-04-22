@@ -7,17 +7,25 @@ import { useSelector } from 'react-redux';
 import { selectStart } from '../features/startSlice';
 import { selectEnd } from '../features/endSlice';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom'
+
 
 const Results = ({ src, title, description, prize, stock, disableStart, disableEnd }) => {
     const classes = useStyles();
     const start = useSelector(selectStart);
     const end = useSelector(selectEnd);
+    const history = useHistory();
     let todayHere = new Date()
     let dataRedux = moment(end).format('DD [de] MMMM [del] YYYY')
     let today = moment(todayHere).format('DD [de] MMMM [del] YYYY')
     const handleReservation = () => {
-        swal(dataRedux ===  today ? "Advertencia": "Reservado!", dataRedux ===  today ? "Debe agendar una reserva agregando los dias a utilizar la habitación y cantidad de personas a utilizarla":'Reserva realizada con exito' , dataRedux ===  today ? "warning":"success");
+        if(dataRedux ===  today){
+            swal( "Advertencia","Debe agendar una reserva agregando los dias a utilizar la habitación y cantidad de personas a utilizarla","warning");
+        }else{
+            history.push('/formSuscribe', { src, title } )
+        }
     };
+    
     return (
         <Paper elevation={0} className={classes.root}>
             <div className={classes.background}>
@@ -31,7 +39,7 @@ const Results = ({ src, title, description, prize, stock, disableStart, disableE
                     <Typography variant="h5">Habitaciones disponibles <span className={classes.number}> {stock} </span></Typography>
                     <Typography variant="h5">No disponible desde <span style={{fontWeight:'bold'}}> {moment(disableStart).format('DD [de] MMMM [del] YYYY')} </span> hasta <span style={{fontWeight:'bold'}}> {moment(disableEnd).format('DD [de] MMMM [del] YYYY')} </span></Typography>
                     { 
-                    end<disableStart.valueOf() || start > disableEnd.valueOf() ? (<Button variant="contained" onClick={handleReservation} className={classes.botonsito} > Realizar reserva </Button>):(<Button variant="contained" color="primary" disabled> Realizar reserva</Button>)
+                    end<disableStart.valueOf() || start > disableEnd.valueOf() ? (dataRedux !==  today?(<Button variant="contained" onClick={handleReservation} className={classes.botonsito} > Realizar reserva </Button>):''):(<Button variant="contained" color="primary" disabled> Realizar reserva</Button>)
                     }
                 </div>
             </div>

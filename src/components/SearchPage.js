@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { dataFilter } from './RoomsData';
 import { Chip, Link, Slider } from '@material-ui/core';
@@ -9,17 +9,18 @@ import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import Results from './Results';
 import dataRoom from './RoomsData';
 import backgroundImage from '../issest/img/fondo.1.svg';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch  } from 'react-redux';
 import { selectStart } from '../features/startSlice';
 import { selectEnd } from '../features/endSlice';
 import * as moment from 'moment';
 import 'moment/locale/es'  // without this line it didn't work
+import { setSearch } from '../features/searchSlice';
 
 const SearchPage = () => {
     const classes = useStyles();
     const start = useSelector(selectStart);
     const end = useSelector(selectEnd);
-
+    const dispatch = useDispatch();
     const [money, setMoney] = useState(100);
     const isThereMoney = () => {
         if(money<500){
@@ -27,6 +28,7 @@ const SearchPage = () => {
         }
         
     }
+    
     const isntThereMoney = () => {
         if(money>100){
             setMoney(money - 100)
@@ -35,6 +37,10 @@ const SearchPage = () => {
     const handleChange = (event, value) => {
         setMoney(value);
     };
+
+    useEffect(() => {
+            dispatch(setSearch('...123'));
+    },[])
     let todayHere = new Date()
     
     let dataRedux = moment(end).format('DD [de] MMMM [del] YYYY')
@@ -72,7 +78,7 @@ const SearchPage = () => {
             </div>
             <div className={classes.slider}>
                 
-                <Link style={{cursor:'pointer'}} onClick={() => isntThereMoney()}> 
+                <Link style={{cursor:'pointer', textDecoration:'none'}} onClick={() => isntThereMoney()}> 
                 <p style={{ color: '#A2443D',fontSize: 20 }}>
                         -100
                 </p>
@@ -89,7 +95,7 @@ const SearchPage = () => {
                     onChange={handleChange}
                     aria-labelledby="continuous-slider" />
 
-                <Link style={{cursor:'pointer'}} onClick={() => isThereMoney()}>
+                <Link style={{cursor:'pointer',  textDecoration:'none'}} onClick={() => isThereMoney()}>
                 <p style={{ color: '#A2443D',fontSize: 20 }}>
                         +100
                 </p>
@@ -102,7 +108,6 @@ const SearchPage = () => {
                 {
                     dataRoom
                         .filter((data) => (data.cat === "room" && data.prize <= money))
-                        // .filter((data) => end < data.notAvailableStart.valueOf() || start > data.notAvailableEnd.valueOf() )
                         .map(({ src, title, description, prize, stock, notAvailableStart, notAvailableEnd }) => (
                             <Results title={title} description={description} src={src} prize={prize} stock={stock} disableStart={notAvailableStart} disableEnd={notAvailableEnd} />
                         ))
@@ -124,6 +129,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         boxShadow: 'none',
+        minHeight: 'calc(100vh - (126px+56px))',
     },
     chipInside: {
         backgroundColor: 'rgba(152,47,39,0.9)',
@@ -145,7 +151,6 @@ const useStyles = makeStyles((theme) => ({
         width:'50%',
         display: 'flex',
         flexDirection: 'row',
-        // textAlign: 'center', 
         justifyContent: 'left',
         marginLeft: '2vw',
         alignItems: 'center', 
@@ -162,9 +167,7 @@ const useStyles = makeStyles((theme) => ({
         width:'100%',
         display: 'flex',
         flexDirection: 'row',
-        // textAlign: 'center', 
-        justifyContent: 'left',
-        marginLeft: '2vw',
+        justifyContent: 'center',
         alignItems: 'center', 
         color: '#A2443D', 
         fontSize: '25px',

@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectStart, setStart } from '../features/startSlice';
 import { selectEnd, setEnd } from '../features/endSlice';
+
 import swal from 'sweetalert';
 import * as moment from 'moment';
 import 'moment/locale/es'  // without this line it didn't work
@@ -38,7 +39,7 @@ const DatePicker = () => {
 
     const validateData = () => {
         if(dataRedux===todaytwo){
-            swal( "Advertencia", "Debe reservar minimo con 1 dia con anterioridad, de lo contrario si es reserva inmediata debe ponerse en contacto con el personal para saber si hay habitaciones disponibles inmediatas","warning");
+            swal( "Advertencia", "Debe reservar minimo con 1 dia de anterioridad, de lo contrario si es reserva inmediata debe ponerse en contacto con el personal para saber si hay habitaciones disponibles inmediatas","warning");
         }
         else{
             if (people && dateStart && dateEnd) {
@@ -46,8 +47,7 @@ const DatePicker = () => {
                 
             }
             else {
-                console.log('inicio',dateStart)
-                console.log('final',dateEnd)
+                
                 if (!people) {
                     swal("Advertencia", "Debe ingresar la cantidad de personas a ocupar la habitación", "warning");
                 }

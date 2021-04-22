@@ -1,17 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, CssBaseline, makeStyles } from '@material-ui/core'
 import Banner from './Banner';
 import RoomCard from './RoomCard';
 import DatePicker from './DatePicker';
 import dataRoom from './RoomsData'
 import backgroundImage from '../issest/img/fondo.1.svg'
+import useSearch from '../hooks/useSearch'
+import { useSelector } from 'react-redux';
+import { selectSearch } from '../features/searchSlice';
 
 const resetModals = (data) => data.map((room) => ({ ...room, show: false }));
 
 const Home = () => {
   const classes = useStyle();
+  const dataComplete = useSelector(selectSearch);
+  const [filteredData, setSearchValueData, setSourceDataData] = useSearch();
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [dataCard, setDataCard] = useState(resetModals(dataRoom));
+  const [dataCard, setDataCard] = useState(resetModals(filteredData));
+  
+  useEffect(()=>{
+    setSearchValueData(dataComplete.toString());
+  },[dataComplete])
+
+  useEffect(()=>{
+    setSourceDataData(dataRoom);
+  },[])
+
+  useEffect(()=>{
+    setDataCard(resetModals(filteredData));
+  },[filteredData])
 
   const handleModal = (index) => () => {
     setDataCard(prev => {
@@ -58,6 +75,7 @@ const useStyle = makeStyles((theme) => ({
     backgroundPosition: 'fixed',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+    minHeight: 'calc(100vh - (126px+56px))',
   },
   dates: {
     display: 'flex',

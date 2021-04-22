@@ -5,12 +5,22 @@ import foto from '../issest/img/foto.jpg'
 import SearchIcon from '@material-ui/icons/Search'
 import MenuIcon from '@material-ui/icons/Menu'
 import Drawer from '@material-ui/core/Drawer';
+import {useHistory} from 'react-router-dom';
+import { Lightbox } from "react-modal-image";
+import { useSelector, useDispatch } from 'react-redux';
+import { selectSearch, setSearch } from '../features/searchSlice';
+
+
 
 const Header = () => {
-
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const data = useSelector(selectSearch);
+    
     const [mobileView, setMobileView] = useState(true);
     const [mobileViewAvatar, setMobileViewAvatar] = useState(true);
     const [draweropen, setDraweropen] = useState(false);
+    const [open, setOpen] = useState(false);
     const classes = useStyle();
 
     useEffect(() => {
@@ -33,20 +43,37 @@ const Header = () => {
             setDraweropen(false);
         };
 
-        const headersData = ["Mi cuenta", "Habitaciones de lujo", "Cerrar sesión"];
+        
+
+        const handleOpen = () => {
+        setOpen(true);
+        };
+    
+        const handleClose = () => {
+        setOpen(false);
+        };
+        
+
+        const headersData = [
+            {nombre:"Home",
+            funcion: '/'}, 
+            {nombre:"Ver habitaciones",
+            funcion: '/search'}, 
+            ];
 
         const getDrawerChoices = () => {
             return headersData.map((data) => {
                 return (
                     <List>
-                        <Button variant="contained" onClick={() => { alert('pulsado') }} style={{ backgroundColor: 'white', width: '100%', color: "#982F27" }}>
-                            {data} {/* Aqui podemos hacer un onClick y aqui en el meter en el array el navigator */}
+                        <Button variant="contained" onClick={() => { history.push(data.funcion) }} style={{ backgroundColor: 'white', width: '100%', color: "#982F27" }}>
+                            {data.nombre} {/* Aqui podemos hacer un onClick y aqui en el meter en el array el navigator */}
                         </Button>
                     </List>
                 );
             });
         };
         return (
+            <>
             <Toolbar className={classes.toolbar}>
                 <IconButton
                     {...{
@@ -76,29 +103,66 @@ const Header = () => {
                 </a>
                 <div className={classes.right}>
                     {mobileViewAvatar && (<a href='/' style={{ textDecoration: 'none', color: "#982F27" }}> Rafael Martínez </a>)}
-                    <Link href="/" ><Avatar alt='Foto' src={foto} className={classes.avatar} /> </Link>
+                    <Link onClick={handleOpen}><Avatar alt='Foto' src={foto} className={classes.avatar} /> </Link>
 
                 </div>
+            
             </Toolbar>
+                <div>
+                {open&&(<Lightbox
+                    medium={foto}
+                    large={foto}
+                    alt='Profile-Picture'
+                    
+                    onClose={handleClose}
+                    />)}
+                </div>
+                </>
         );
     };
 
     const displayDesktop = () => {
+        const setData = (data) =>{
+            dispatch(setSearch(data.target.value));
+        }
+
+        const handleOpen = () => {
+            setOpen(true);
+            };
+        
+            const handleClose = () => {
+            setOpen(false);
+            };
+
         return (
+            <>
             <Toolbar className={classes.toolbar}>
                 <a href='/'>
                     <img alt='logo' src={logo} className={classes.logo} />
                 </a>
                 <div className={classes.center}>
-                    <InputBase fullwidth placeholder="Buscar ..." inputProps={{ className: classes.input }} />
+                    {
+                        data !=='...123' ? (<InputBase fullwidth onChange={setData} placeholder="Buscar ..." inputProps={{ className: classes.input }} />) : (<InputBase fullwidth onChange={setData} placeholder="               Deshabilitado" inputProps={{ className: classes.input }} disabled/>)
+                    }
+                    {/* <InputBase fullwidth onChange={setData} placeholder="Buscar ..." inputProps={{ className: classes.input }} /> */}
                     <SearchIcon style={{ color: '#982F27', paddingRight: '5px' }} />
                 </div>
                 <div className={classes.right}>
                     {mobileViewAvatar && (<a href='/' style={{ textDecoration: 'none', color: "#982F27" }}> Rafael Martínez </a>)}
-                    <Link href="/" ><Avatar alt='Foto' src={foto} className={classes.avatar} /> </Link>
+                    <Link style={{ cursor:'pointer'}} onClick={handleOpen} ><Avatar alt='Foto' src={foto} className={classes.avatar} /> </Link>
 
                 </div>
             </Toolbar>
+            <div>
+            {open&&(<Lightbox
+                medium={foto}
+                large={foto}
+                alt='Profile-Picture'
+                
+                onClose={handleClose}
+                />)}
+            </div>
+            </>
         )
     }
 

@@ -33,6 +33,13 @@ const useStyle = makeStyles((theme) => ({
         width: '350px',
         "@media (max-width: 450px)": {
             width: '100%',
+            '&:hover': {
+                backgroundColor: 'rgba(152,47,39,0.9)',
+                color: 'white',
+                fontWeight: 'bold',
+                borderBottomRightRadius: 75,
+                borderBottomLeftRadius: 75,
+            },  
         },
         backgroundColor: 'rgba(152,47,39,0.5)',
         color: 'white',
